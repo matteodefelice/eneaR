@@ -9,4 +9,5 @@ Please **be careful** this package is still under-development.
 - `getEqualFreqBreaks`: it splits a vector into parts with the same size
 - `mySave`: replace your `save` with `mySave` to attach metadata to your saved R data
 - `getTSfromSHP`: a very advanced function that aggregates gridded data on European NUTS regions (from ADM0 to ADM2) in time-series. 
+- `means_along`: a very naive function to perform the mean on the n-th dimension of an array avoiding `apply`
 
