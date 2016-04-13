@@ -8,33 +8,33 @@ Plot gridded discrete data
 Display geo-gridded data.
 }
 \usage{
-plot_field_discrete(x, lon, lat, lonlim = c(-180, 180), latlim = c(-70, 70), labels, breaks, cscale = "Spectral", varname = "x", title = c(), mask = NULL, siglev = NULL, plot_only_sig = F, smooth = F, smooth_factor = 5, smooth_theta = 0.5, lineWidth = 0.5, dotSize = 0.5, GRID_STEP = 10, FONT_SIZE = 18)
+plot_field_discrete(x, lon, lat, lonlim = c(-180, 180), latlim = c(-70, 70), labels = NA, breaks, cscale = "Spectral", varname = "x", title = c(), mask = NULL, siglev = NULL, plot_only_sig = F, smooth = F, smooth_factor = 5, smooth_theta = 0.5, lineWidth = 0.5, dotSize = 0.5, GRID_STEP = 10, FONT_SIZE = 18)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-The data field to plot. It can be a matrix (suggested) or a data frame
+The data field to plot. It can be a matrix (suggested) or a data frame. The matrix should have longitudinal data on the rows, otherwise the function will try to transpose the matrix giving a warning message. The data frame instead should have three columns with longitude, latitude and the data to plot. 
 }
   \item{lon}{
-%%     ~~Describe \code{lon} here~~
+Longitude vector in the range -180, 180. If the longitude is provided in the 0, 360 range it will be transformed with a warning message.
 }
   \item{lat}{
-%%     ~~Describe \code{lat} here~~
+Latitude vector. 
 }
   \item{lonlim}{
-%%     ~~Describe \code{lonlim} here~~
+Plot longitude range.
 }
   \item{latlim}{
-%%     ~~Describe \code{latlim} here~~
+Plot latitude range.
 }
   \item{labels}{
-%%     ~~Describe \code{labels} here~~
+A character vector of labels associated to the breaks. The length of this vector should be equals to the length of breaks + 2 (the two extremes). If the length of the labels vector is zero, the function `pretty_labels` is used on the breaks vector.
 }
   \item{breaks}{
-%%     ~~Describe \code{breaks} here~~
+A vector with the break values. The breaks are considered "open" at both sides, i.e. -Inf and Inf are added at the extremes. 
 }
   \item{cscale}{
-%%     ~~Describe \code{cscale} here~~
+The colorscale, it may be the name of a colorbrewer palette (see http://colorbrewer2.org/) or a vector containing the colors used. Spectral palette is used as default.
 }
   \item{varname}{
 %%     ~~Describe \code{varname} here~~

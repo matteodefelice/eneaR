@@ -14,4 +14,6 @@ Depends: R (>= 3.1.0),
     RColorBrewer,
     sp,
     rgdal,
-    scales
+    scales,
+    fields,
+    akima
