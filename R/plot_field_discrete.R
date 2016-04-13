@@ -28,12 +28,11 @@ plot_field_discrete = function(x, lon, lat, lonlim = c(-180, 180), latlim = c(-7
   if (smooth) {
     library(fields)
     library(akima)
-    browser()
+    
     z = image.smooth(x, theta = smooth_theta)  #theta is the bandwidth parameter
     z = interp.surface.grid(list(x = lon, y = lat, z = z$z), 
                              grid.list = list(x = seq(lonlim[1], lonlim[2], mean(diff(lon))/smooth_factor),
                                               y = seq(latlim[1], latlim[2], mean(diff(lat))/smooth_factor)))
-    # message('Original dim ', dim(x), ' interp. ', dim(z$z))
     x = z$z
     lon = z$x
     lat = z$y
@@ -132,9 +131,6 @@ plot_field_discrete = function(x, lon, lat, lonlim = c(-180, 180), latlim = c(-7
   g = g + scale_y_continuous(expand = c(0, 0), breaks = seq(-180, 180, by = GRID_STEP), limits = latlim)
   g = g + theme(text = element_text(size = FONT_SIZE), panel.border = element_rect(colour = "black", size = 2,
                                                                                    fill = NA), panel.grid.major = element_line(colour = "black", size = 0.25))
-  
-  # g = g + scale_x_continuous(limits = lonlim, expand = c(0,0)) + scale_y_continuous(limits = latlim, expand
-  # = c(0,0))
   g = g + xlab("Longitude") + ylab("Latitude")
   return(g)
 }
