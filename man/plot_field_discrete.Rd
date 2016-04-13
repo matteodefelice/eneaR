@@ -13,7 +13,7 @@ plot_field_discrete(x, lon, lat, lonlim = c(-180, 180), latlim = c(-70, 70), lab
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+The data field to plot. It can be a matrix (suggested) or a data frame
 }
   \item{lon}{
 %%     ~~Describe \code{lon} here~~

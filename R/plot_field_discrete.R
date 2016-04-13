@@ -5,11 +5,10 @@ plot_field_discrete = function(x, lon, lat, lonlim = c(-180, 180), latlim = c(-7
     ## X must be lon [rows] x lat [columns]
     ## Load world border shapefile: high-res for 'small' fileds
     if (length(latlim) > 0 && length(lonlim) > 0 && (diff(lonlim) * diff(latlim)) < 2500) {
-        wmap = readShapeSpatial(system.file("borders", "TM_WORLD_BORDERS-0.3.shp", package = "enear"))
+        load(system.file("borders", "TM_WORLD_BORDERS-0.3.shp.Rdata", package = "enear"))
     } else {
-        wmap = readShapeSpatial(system.file("borders", "TM_WORLD_BORDERS_SIMPL-0.3.shp", package = "enear"))
+        load(system.file("borders", "TM_WORLD_BORDERS_SIMPL-0.3.shp.Rdata", package = "enear"))
     }
-    wmap = fortify(wmap)
     ## Checking longitude range
     if (any(lon > 180)) {
         # convert lon from 0-360 to -180,180

@@ -9,7 +9,6 @@ License: What license is it under?
 LazyData: TRUE
 Depends: R (>= 3.1.0),
     dplyr,
-    maptools,
     ggplot2,
     reshape2,
     RColorBrewer,
