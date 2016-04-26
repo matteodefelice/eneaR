@@ -31,8 +31,8 @@ plot_field_discrete = function(x, lon, lat, lonlim = c(-180, 180), latlim = c(-7
     
     z = image.smooth(x, theta = smooth_theta)  #theta is the bandwidth parameter
     z = interp.surface.grid(list(x = lon, y = lat, z = z$z), 
-                             grid.list = list(x = seq(lonlim[1], lonlim[2], mean(diff(lon))/smooth_factor),
-                                              y = seq(latlim[1], latlim[2], mean(diff(lat))/smooth_factor)))
+                             grid.list = list(x = seq(lonlim[1], lonlim[2], abs(mean(diff(lon)))/smooth_factor),
+                                              y = seq(latlim[1], latlim[2], abs(mean(diff(lat)))/smooth_factor)))
     x = z$z
     lon = z$x
     lat = z$y
