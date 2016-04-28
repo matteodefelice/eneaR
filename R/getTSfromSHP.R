@@ -5,6 +5,7 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2) {
         eumap = readOGR(system.file("NUTS", package = "eneaR"), "NUTS_REG_01M_2013_ADM1")
     } else {
         eumap = readOGR(system.file("NUTS", package = "eneaR"), "countries_EU")
+        names(eumap)[1] = "NUTS_ID"
     }
 
     if (!is.list(obj)) {
@@ -23,7 +24,7 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2) {
 
     coordinates(pts) = c("lon", "lat")
     proj4string(pts) = proj4string(eumap)
-
+    
     over_target = over(pts, as(eumap, "SpatialPolygons"))
     pts$region = eumap$NUTS_ID[over_target]
 
