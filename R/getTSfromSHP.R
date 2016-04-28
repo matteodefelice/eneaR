@@ -1,8 +1,8 @@
 getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2) {
     if (ADM == 2) {
-        eumap = readOGR(system.file("NUTS", "NUTS_REG_01M_2013_REGIONS", package = "eneaR"))
+        eumap = readOGR(system.file("NUTS", "NUTS_REG_01M_2013_REGIONS.shp", package = "eneaR"))
     } else {
-        eumap = readOGR(system.file("NUTS", "NUTS_REG_01M_2013_ADM1", package = "eneaR"))
+        eumap = readOGR(system.file("NUTS", "NUTS_REG_01M_2013_ADM1.shp", package = "eneaR"))
     }
 
     if (!is.list(obj)) {
