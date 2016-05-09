@@ -13,7 +13,6 @@ Depends: R (>= 3.1.0),
     reshape2,
     RColorBrewer,
     sp,
-    rgdal,
     scales,
     fields,
     akima
