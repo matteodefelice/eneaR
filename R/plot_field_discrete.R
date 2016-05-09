@@ -25,6 +25,19 @@ plot_field_discrete = function(x, lon, lat, lonlim = c(-180, 180), latlim = c(-7
     warning("Smoothing procedure on data frames is not implemented")
     smooth = F
   }
+  
+  if (!is.data.frame(x)) {
+    # Check dimensions
+    if (dim(x)[1] != length(lon)) {
+      if (dim(x)[2] == length(lon)) {
+        warning("Latitude and longitude vectors look swapped, data field will be transposed")
+        x = t(x)
+      } else {
+        stop("Dimensions of x are not consistent with the lat-lon vectors provided")
+      }
+    }
+  }
+  
   if (smooth) {
     library(fields)
     library(akima)
@@ -38,15 +51,6 @@ plot_field_discrete = function(x, lon, lat, lonlim = c(-180, 180), latlim = c(-7
     lat = z$y
   }
   if (!is.data.frame(x)) {
-    # Check dimensions
-    if (dim(x)[1] != length(lon)) {
-      if (dim(x)[2] == length(lon)) {
-        warning("Latitude and longitude vectors look swapped, data field will be transposed")
-        x = t(x)
-      } else {
-        stop("Dimensions of x are not consistent with the lat-lon vectors provided")
-      }
-    }
     # convert to data frame
     dd = melt(x)
     dd[, 1] = lon[dd[, 1]]
