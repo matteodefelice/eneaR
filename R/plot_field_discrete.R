@@ -1,4 +1,4 @@
-plot_field_discrete = function(x, lon, lat, lonlim = c(-180, 180), latlim = c(-70, 70), labels = c(), breaks, cscale = "Spectral",
+plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', labels = c(), breaks, cscale = "Spectral",
                                varname = "x", title = c(), mask = NULL, siglev = NULL, plot_only_sig = F, smooth = F, smooth_factor = 5,
                                smooth_theta = 0.5, lineWidth = 0.5, dotSize = 0.5, GRID_STEP = 10, FONT_SIZE = 18) {
   
@@ -19,7 +19,13 @@ plot_field_discrete = function(x, lon, lat, lonlim = c(-180, 180), latlim = c(-7
   if (is.array(x) && length(dim(x)) > 2) {
     stop("you cannot plot an array with more than two dimensions")
   }
-  
+  #######################
+  if (is.character(lonlim)) {
+    lonlim = range(lon)
+  }
+  if (is.character(latlim)) {
+    latlim = range(lat)
+  }
   ####################### SMOOTHING PART #########################
   if (smooth && is.data.frame(x)) {
     warning("Smoothing procedure on data frames is not implemented")
