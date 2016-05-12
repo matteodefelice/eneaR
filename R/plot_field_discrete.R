@@ -4,7 +4,7 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
   
   ## X must be lon [rows] x lat [columns]
   ## Load world border shapefile: high-res for 'small' fileds
-  if (length(latlim) > 0 && length(lonlim) > 0 && (diff(lonlim) * diff(latlim)) < 2500) {
+  if ((length(lon) * length(lat)) < 2500) {
     load(system.file("borders", "TM_WORLD_BORDERS-0.3.shp.Rdata", package = "eneaR"))
   } else {
     load(system.file("borders", "TM_WORLD_BORDERS_SIMPL-0.3.shp.Rdata", package = "eneaR"))
