@@ -52,13 +52,13 @@ Level of significance to show. All the points where mask <= siglev will be dotte
 Instead of displaying dots over the grid points that satisfy the condition mask < siglev, only those points will be shown leaving the rest of the data as NA. 
 }
   \item{smooth}{
-%%     ~~Describe \code{smooth} here~~
+Apply a spatial smoothing to the data to make it easier to read. 
 }
   \item{smooth_factor}{
-%%     ~~Describe \code{smooth_factor} here~~
+The coefficient defining how much the shown grid will be finer than the original.
 }
   \item{smooth_theta}{
-%%     ~~Describe \code{smooth_theta} here~~
+The `theta` factor of `fields::image.smooth`
 }
   \item{lineWidth}{
 %%     ~~Describe \code{lineWidth} here~~
