@@ -61,33 +61,29 @@ The coefficient defining how much the shown grid will be finer than the original
 The `theta` factor of `fields::image.smooth`
 }
   \item{lineWidth}{
-%%     ~~Describe \code{lineWidth} here~~
+Width of the borders lines.
 }
   \item{dotSize}{
-%%     ~~Describe \code{dotSize} here~~
+Size of the dots used to show significance.
 }
   \item{GRID_STEP}{
-%%     ~~Describe \code{GRID_STEP} here~~
+Distance between latitude/longitude axis labels
 }
   \item{FONT_SIZE}{
-%%     ~~Describe \code{FONT_SIZE} here~~
+Font size.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+Details about the smoothing process.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Return a `ggplot` object. 
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Matteo De Felice
 }
 \note{
 %%  ~~further notes~~
@@ -99,9 +95,7 @@ The `theta` factor of `fields::image.smooth`
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+
 
 data(ncep)
 p = plot_field_discrete(z, lon, lat, breaks = c(5e-5, 1e-4))
