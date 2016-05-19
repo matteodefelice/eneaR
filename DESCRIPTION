@@ -15,4 +15,5 @@ Depends: R (>= 3.1.0),
     sp,
     scales,
     fields,
-    akima
+    akima,
+    rgdal
