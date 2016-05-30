@@ -4,7 +4,7 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
   
   ## X must be lon [rows] x lat [columns]
   ## Load world border shapefile: high-res for 'small' fileds
-  if ((length(lon) * length(lat)) < 2500) {
+  if ((length(lon) * length(lat)) < 50000) {
     load(system.file("borders", "TM_WORLD_BORDERS-0.3.shp.Rdata", package = "eneaR"))
   } else {
     load(system.file("borders", "TM_WORLD_BORDERS_SIMPL-0.3.shp.Rdata", package = "eneaR"))
@@ -137,8 +137,9 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
   
   g = g + ggtitle(title)
   g = g + theme_bw()  #+ theme(, panel.grid.major = element_line(size=1))
-  g = g + scale_x_continuous(expand = c(0, 0), breaks = seq(-180, 180, by = GRID_STEP), limits = lonlim)
-  g = g + scale_y_continuous(expand = c(0, 0), breaks = seq(-180, 180, by = GRID_STEP), limits = latlim)
+  g = g + scale_x_continuous(expand = c(0, 0), breaks = seq(-180, 180, by = GRID_STEP))
+  g = g + scale_y_continuous(expand = c(0, 0), breaks = seq(-180, 180, by = GRID_STEP))
+  g = g + coord_cartesian(xlim = lonlim, ylim = latlim)
   g = g + theme(text = element_text(size = FONT_SIZE), panel.border = element_rect(colour = "black", size = 2,
                                                                                    fill = NA), panel.grid.major = element_line(colour = "black", size = 0.25))
   g = g + xlab("Longitude") + ylab("Latitude")
