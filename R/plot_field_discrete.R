@@ -1,4 +1,4 @@
-plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', labels = c(), breaks, cscale = "Spectral",
+plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', labels = c(), breaks = c(), cscale = "Spectral",
                                varname = "x", title = c(), mask = NULL, siglev = NULL, plot_only_sig = F, smooth = F, smooth_factor = 5,
                                smooth_theta = 0.5, lineWidth = 0.5, dotSize = 0.5, GRID_STEP = 10, FONT_SIZE = 18) {
   
@@ -71,6 +71,11 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
   names(dd) = c("lon", "lat", "x")
   
   dd$orig_x = dd$x
+  
+  # Adding default breaks (5 bins)
+  if (length(breaks) == 0) {
+    breaks = hist(x, plot = F, breaks = 5)$breaks
+  }
   
   # Adding default labels
   if (length(labels) == 0) {
