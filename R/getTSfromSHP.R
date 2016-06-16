@@ -3,9 +3,11 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2) {
         eumap = readOGR(system.file("NUTS", package = "eneaR"), "NUTS_REG_01M_2013_REGIONS")
     } else if (ADM == 1) {
         eumap = readOGR(system.file("NUTS", package = "eneaR"), "NUTS_REG_01M_2013_ADM1")
-    } else {
+    } else if (ADM == 0){
         eumap = readOGR(system.file("NUTS", package = "eneaR"), "countries_EU")
         names(eumap)[1] = "NUTS_ID"
+    } else {
+        eumap = readOGR(system.file("NUTS", package = "eneaR"), "Clusters_Borders")
     }
 
     if (!is.list(obj)) {
