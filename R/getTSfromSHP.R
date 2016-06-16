@@ -7,7 +7,7 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2) {
         eumap = readOGR(system.file("NUTS", package = "eneaR"), "countries_EU")
         names(eumap)[1] = "NUTS_ID"
     } else {
-        eumap = readOGR(system.file("NUTS", package = "eneaR"), "Clusters_Borders")
+        eumap = readOGR(system.file("NUTS", package = "eneaR"), "borders-wgs84")
     }
 
     if (!is.list(obj)) {
