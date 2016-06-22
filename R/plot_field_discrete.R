@@ -138,8 +138,10 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
       cscale = brewer.pal(length(labels), 'Spectral')
     }
   }
-  g = g + scale_fill_manual(name = varname, values = cscale, drop = F, guide = show_legend)
-  
+  g = g + scale_fill_manual(name = varname, values = cscale, drop = F)
+  if (!show_legend) {
+    g = g + guides(fill = F)
+  }
   g = g + ggtitle(title)
   g = g + theme_bw()  #+ theme(, panel.grid.major = element_line(size=1))
   g = g + scale_x_continuous(expand = c(0, 0), breaks = seq(-180, 180, by = GRID_STEP))
