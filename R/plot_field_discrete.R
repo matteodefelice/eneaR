@@ -1,6 +1,6 @@
 plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', labels = c(), breaks = c(), cscale = "Spectral",
                                varname = "x", title = c(), mask = NULL, siglev = NULL, plot_only_sig = F, smooth = F, smooth_factor = 5,
-                               smooth_theta = 0.5, lineWidth = 0.5, dotSize = 0.5, GRID_STEP = 10, FONT_SIZE = 18) {
+                               smooth_theta = 0.5, lineWidth = 0.5, dotSize = 0.5, GRID_STEP = 10, FONT_SIZE = 18, show_legend = T) {
   
   ## X must be lon [rows] x lat [columns]
   ## Load world border shapefile: high-res for 'small' fileds
@@ -138,7 +138,7 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
       cscale = brewer.pal(length(labels), 'Spectral')
     }
   }
-  g = g + scale_fill_manual(name = varname, values = cscale, drop = F)
+  g = g + scale_fill_manual(name = varname, values = cscale, drop = F, guide = show_legend)
   
   g = g + ggtitle(title)
   g = g + theme_bw()  #+ theme(, panel.grid.major = element_line(size=1))
