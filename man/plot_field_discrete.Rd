@@ -13,7 +13,7 @@ plot_field_discrete(x, lon, lat, lonlim = 'auto', latlim = 'auto', labels = c(),
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-The data field to plot. It can be a matrix (suggested) or a data frame. The matrix should have longitudinal data on the rows, otherwise the function will try to transpose the matrix giving a warning message. The data frame instead should have three columns with longitude, latitude and the data to plot. 
+The data field to plot. It can be a matrix (suggested) or a vector. The matrix should have longitudinal data on the rows, otherwise the function will try to transpose the matrix giving a warning message. The data frame instead should have three columns with longitude, latitude and the data to plot. 
 }
   \item{lon}{
 Longitude vector in the range -180, 180. If the longitude is provided in the 0, 360 range it will be transformed with a warning message. 
