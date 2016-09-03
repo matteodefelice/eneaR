@@ -27,12 +27,13 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
     latlim = range(lat)
   }
   ####################### SMOOTHING PART #########################
-  if (smooth && is.data.frame(x)) {
-    warning("Smoothing procedure on data frames is not implemented")
+  if (smooth && is.vector(x)) {
+    warning("Smoothing procedure on vector is not implemented")
     smooth = F
   }
   
-  if (!is.data.frame(x)) {
+  # In case of matrix, check dimensions
+  if (!is.vector(x)) {
     # Check dimensions
     if (dim(x)[1] != length(lon)) {
       if (dim(x)[2] == length(lon)) {
@@ -43,7 +44,7 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
       }
     }
   }
-  
+  # Smoothing part
   if (smooth) {
     library(fields)
     library(akima)
@@ -56,19 +57,17 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
     lon = z$x
     lat = z$y
   }
-  if (!is.data.frame(x)) {
+  if (!is.vector(x)) {
     # convert to data frame
     dd = melt(x)
     dd[, 1] = lon[dd[, 1]]
     dd[, 2] = lat[dd[, 2]]
   } else {
-    if (ncol(x) != 3) {
-      stop('The data frame should have three columns containing longitude, latitude and the data field')
+    if ((length(x) != length(lon)) || (length(x) != length(lat))) {
+      stop('The vector length is not consistent with latitude/longitude length')
     }
-    dd = x
+    dd = data.frame(lon = lon, lat = lat, x = x)
   }
-  # Putting the right column names
-  names(dd) = c("lon", "lat", "x")
   
   dd$orig_x = dd$x
   
