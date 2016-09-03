@@ -118,13 +118,13 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
   
   # NORMAL PLOT
   if (!plot_only_sig) {
-    g = ggplot() + geom_raster(data = dd, aes(x = lon, y = lat, fill = x), alpha = 0.8)
+    g = ggplot() + geom_tile(data = dd, aes(x = lon, y = lat, fill = x, color = x), alpha = 0.8)
     if (!is.null(mask)) {
       g = g + geom_point(data = ij_data, aes(lon_dots, lat_dots), size = dotSize, alpha = 0.75, stroke = 0,
                          shape = 16)  #this line is due to ggplot2.0.0
     }
   } else {
-    g = ggplot() + geom_raster(data = filter(dd, sig == 1), aes(x = lon, y = lat, fill = x), alpha = 0.8)
+    g = ggplot() + geom_tile(data = filter(dd, sig == 1), aes(x = lon, y = lat, fill = x, color = x), alpha = 0.8)
   }
   
   g = g + geom_path(data = wmap, aes(x = long, y = lat, group = group), size = lineWidth)
@@ -138,8 +138,9 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
     }
   }
   g = g + scale_fill_manual(name = varname, values = cscale, drop = F)
+  g = g + scale_color_manual(name = varname, values = cscale, drop = F)
   if (!show_legend) {
-    g = g + guides(fill = F)
+    g = g + guides(fill = F, color = F)
   }
   g = g + ggtitle(title)
   g = g + theme_bw()  #+ theme(, panel.grid.major = element_line(size=1))
