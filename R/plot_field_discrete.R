@@ -62,7 +62,8 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
     dd = melt(x)
     dd[, 1] = lon[dd[, 1]]
     dd[, 2] = lat[dd[, 2]]
-    names(dd)[3] = 'x'
+    names(dd) = c('lon', 'lat', 'x')
+
   } else {
     if ((length(x) != length(lon)) || (length(x) != length(lat))) {
       stop('The vector length is not consistent with latitude/longitude length')
