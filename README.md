@@ -11,4 +11,5 @@ You can install the package using `devtools` with `devtools::install_github("mat
 - `mySave`: replace your `save` with `mySave` to attach metadata to your saved R data
 - `getTSfromSHP`: a very advanced function that aggregates gridded data on European NUTS regions (from ADM0 to ADM2) in time-series. 
 - `means_along`: a very naive function to perform the mean on the n-th dimension of an array avoiding `apply`
+- `getEconomicValue`: a vector-based function to evaluate the Economic Value of a probabilistic forecast according the Richardson definition
 
