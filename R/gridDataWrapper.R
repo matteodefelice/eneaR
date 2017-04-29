@@ -1,18 +1,19 @@
 #' @title Wrap data into a grid object
 #' @description Wrap an array in a grid object (as defined in the `loadeR` bundle)
-#! @param data N-dimensional Array. The number of dimensions depends on the type of gridded data: 4 in case of ensemble data, 3 in the other cases.
-#! @param copy_from_grid Existing grid object to use for the definition of all the parameters except \code{"data"} 
-#! @param dimNames A vector containing the name of the dimensions contained into \code{"data"} in the right order
-#! @param varname The name of the variable contained into \code{"data"} 
-#! @param lat Vector with latitude values (assuming latLonProjection)
-#! @param lon Vector with longitude values (assuming latLonProjection)
-#! @param timeVector If specified it contains all the time stamps for the \code{"data"} time dimension  
-#! @param timeStart The time stamp of the first value of \code{"data"}
-#! @param intervalLength The length (e.g. "1 day") of each time step
-#! @examples \dontrun{
-#! # Averaging two grid data fields (g1 and g2)
-#! g_average = gridDataWrapper(data = 0.5*g1$Data + 0.5 * g2$Data, copy_from_grid = g1)
-#! }
+#' 
+#' @param data N-dimensional Array. The number of dimensions depends on the type of gridded data: 4 in case of ensemble data, 3 in the other cases.
+#' @param copy_from_grid Existing grid object to use for the definition of all the parameters except \code{"data"} 
+#' @param dimNames A vector containing the name of the dimensions contained into \code{"data"} in the right order
+#' @param varname The name of the variable contained into \code{"data"} 
+#' @param lat Vector with latitude values (assuming latLonProjection)
+#' @param lon Vector with longitude values (assuming latLonProjection)
+#' @param timeVector If specified it contains all the time stamps for the \code{"data"} time dimension  
+#' @param timeStart The time stamp of the first value of \code{"data"}
+#' @param intervalLength The length (e.g. "1 day") of each time step
+#' @examples \dontrun{
+#' # Averaging two grid data fields (g1 and g2)
+#' g_average = gridDataWrapper(data = 0.5*g1$Data + 0.5 * g2$Data, copy_from_grid = g1)
+#' }
 #' @export
 #' @author M. De Felice
 gridDataWrapper <- function(data, copy_from_grid = NULL, dimNames = NULL, varname, lat, lon, timeVector = NULL, timeStart, intervalLength) {

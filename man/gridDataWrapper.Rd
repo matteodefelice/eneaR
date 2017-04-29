@@ -7,8 +7,33 @@
 gridDataWrapper(data, copy_from_grid = NULL, dimNames = NULL, varname, lat,
   lon, timeVector = NULL, timeStart, intervalLength)
 }
+\arguments{
+\item{data}{N-dimensional Array. The number of dimensions depends on the type of gridded data: 4 in case of ensemble data, 3 in the other cases.}
+
+\item{copy_from_grid}{Existing grid object to use for the definition of all the parameters except \code{"data"}}
+
+\item{dimNames}{A vector containing the name of the dimensions contained into \code{"data"} in the right order}
+
+\item{varname}{The name of the variable contained into \code{"data"}}
+
+\item{lat}{Vector with latitude values (assuming latLonProjection)}
+
+\item{lon}{Vector with longitude values (assuming latLonProjection)}
+
+\item{timeVector}{If specified it contains all the time stamps for the \code{"data"} time dimension}
+
+\item{timeStart}{The time stamp of the first value of \code{"data"}}
+
+\item{intervalLength}{The length (e.g. "1 day") of each time step}
+}
 \description{
 Wrap an array in a grid object (as defined in the `loadeR` bundle)
+}
+\examples{
+\dontrun{
+# Averaging two grid data fields (g1 and g2)
+g_average = gridDataWrapper(data = 0.5*g1$Data + 0.5 * g2$Data, copy_from_grid = g1)
+}
 }
 \author{
 M. De Felice
