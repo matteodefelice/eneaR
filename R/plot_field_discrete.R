@@ -118,6 +118,9 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
       ij_data$sig = 1
       
       dd = left_join(dd, ij_data)
+    } else {
+      warning('No points are significant according the specified significance level')
+      mask = NULL
     }
   }
   
