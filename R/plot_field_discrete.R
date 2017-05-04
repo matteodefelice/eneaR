@@ -100,22 +100,25 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
   if (!is.null(mask)) {
     # Longitudes and Latitudes of dots
     mask = mask > siglev
-    ij_dots = which(mask == FALSE, arr.ind = T)
-    lon_dots_all = lon[ij_dots[, 2]]
-    lat_dots_all = lat[ij_dots[, 1]]
-    int_dots = 1
-    
-    lon_dots = lon_dots_all[seq(1, length(lon_dots_all), by = int_dots)]
-    lat_dots = lat_dots_all[seq(1, length(lat_dots_all), by = int_dots)]
-    
-    ij_data <- data.frame(lon_dots, lat_dots)
-    
-    ## MERGE with DD
-    names(ij_data) = c("lon", "lat")
-    ij_data$sig = 1
-    
-    dd = left_join(dd, ij_data)
-    
+    # If all the points are not significant (i.e. > siglev)
+    # skip the computation
+    if (any(!mask)) {
+      ij_dots = which(mask == FALSE, arr.ind = T)
+      lon_dots_all = lon[ij_dots[, 2]]
+      lat_dots_all = lat[ij_dots[, 1]]
+      int_dots = 1
+      
+      lon_dots = lon_dots_all[seq(1, length(lon_dots_all), by = int_dots)]
+      lat_dots = lat_dots_all[seq(1, length(lat_dots_all), by = int_dots)]
+      
+      ij_data <- data.frame(lon_dots, lat_dots)
+      
+      ## MERGE with DD
+      names(ij_data) = c("lon", "lat")
+      ij_data$sig = 1
+      
+      dd = left_join(dd, ij_data)
+    }
   }
   
   # NORMAL PLOT
