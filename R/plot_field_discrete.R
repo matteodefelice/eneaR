@@ -3,12 +3,7 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
                                smooth_theta = 0.5, lineWidth = 0.5, dotSize = 0.5, GRID_STEP = 10, FONT_SIZE = 18, show_legend = T) {
   
   ## X must be lon [rows] x lat [columns]
-  ## Load world border shapefile: high-res for 'small' fileds
-  if ((as.numeric(length(lon)) * as.numeric(length(lat))) < 50000) {
-    load(system.file("borders", "TM_WORLD_BORDERS-0.3.shp.Rdata", package = "eneaR"))
-  } else {
-    load(system.file("borders", "TM_WORLD_BORDERS_SIMPL-0.3.shp.Rdata", package = "eneaR"))
-  }
+  
   ## Checking longitude range
   if (any(lon > 180)) {
     # convert lon from 0-360 to -180,180
@@ -25,6 +20,12 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
   }
   if (is.character(latlim)) {
     latlim = range(lat)
+  }
+  ## Load world border shapefile: high-res for 'small' fileds
+  if ((diff(lonlim) * diff(latlim)) < 3200) {
+    load(system.file("borders", "TM_WORLD_BORDERS-0.3.shp.Rdata", package = "eneaR"))
+  } else {
+    load(system.file("borders", "TM_WORLD_BORDERS_SIMPL-0.3.shp.Rdata", package = "eneaR"))
   }
   ####################### SMOOTHING PART #########################
   if (smooth && is.vector(x)) {
