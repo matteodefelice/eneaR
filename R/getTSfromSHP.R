@@ -51,7 +51,9 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2) {
             }
         }
         lsel = do.call("cbind", lsel)
-        if (length(dim(obj)) == 3) {
+        if (length(dim(obj)) == 2) {
+            d = mean(lsel, na.rm = T)
+        } else if (length(dim(obj)) == 3) {
             d = rowMeans(lsel, na.rm = T)
         } else {
             nmem = dim(obj)[1]
