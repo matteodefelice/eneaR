@@ -39,9 +39,14 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2) {
         sel_pts = pts_index[pts_index$region == REG, c(1, 2)]
         lsel = vector("list", nrow(sel_pts))
         for (i in 1:nrow(sel_pts)) {
-            if (length(dim(obj)) == 3) {
+            if (length(dim(obj)) == 2) {
+                ## 2D array
+                lsel[[i]] = obj[sel_pts$lat[i], sel_pts$lon[i]]
+            } else if (length(dim(obj)) == 3) {
+                ## 3D array
                 lsel[[i]] = obj[, sel_pts$lat[i], sel_pts$lon[i]]
             } else {
+                ## 4D array
                 lsel[[i]] = t(obj[, , sel_pts$lat[i], sel_pts$lon[i]])
             }
         }
