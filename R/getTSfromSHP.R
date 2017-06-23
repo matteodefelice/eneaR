@@ -1,4 +1,4 @@
-getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2) {
+getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2, type = 'mean') {
     if (ADM == 2) {
         eumap = readOGR(system.file("NUTS", package = "eneaR"), "NUTS_REG_01M_2013_REGIONS")
     } else if (ADM == 1) {
@@ -9,7 +9,14 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2) {
     } else {
         eumap = readOGR(system.file("NUTS", package = "eneaR"), "borders-wgs84")
     }
-
+    # Select type of arithmetic function
+    if (type == 'mean') {
+        base_fun = mean
+        array_fun = rowMeans
+    } else if (type == 'sum') {
+        base_fun = sum
+        array_fun = rowSums
+    }
     if (!is.list(obj)) {
         if (is.na(lat) || is.na(lon)) {
             stop("You need to specify lat and lon vector in case of not-ECOMS objects")
@@ -52,14 +59,14 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2) {
         }
         lsel = do.call("cbind", lsel)
         if (length(dim(obj)) == 2) {
-            d = mean(lsel, na.rm = T)
+            d = base_fun(lsel, na.rm = T)
         } else if (length(dim(obj)) == 3) {
-            d = rowMeans(lsel, na.rm = T)
+            d = array_fun(lsel, na.rm = T)
         } else {
             nmem = dim(obj)[1]
             d = matrix(NA, nrow = nrow(lsel), ncol = nmem)
             for (k in 1:nmem) {
-                d[, k] = rowMeans(matrix(lsel[, seq(k, ncol(lsel), nmem)], nr = nrow(lsel)), na.rm = T)
+                d[, k] = array_fun(matrix(lsel[, seq(k, ncol(lsel), nmem)], nr = nrow(lsel)), na.rm = T)
             }
         }
         data[[REG]] = d
