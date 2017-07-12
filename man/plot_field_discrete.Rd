@@ -36,6 +36,12 @@ A vector with the break values. The breaks are considered "open" at both sides, 
   \item{cscale}{
 The colorscale, it may be the name of a colorbrewer palette (see http://colorbrewer2.org/) or a vector containing the colors used. Spectral palette is used as default.
 }
+\item{rev_cscale} {
+Reverse the color scale
+}
+item{show_lat_lon_labels} {
+  Show the labels `longitude` and `latitude`
+}
   \item{varname}{
 Name of the plotted variables. It will appear into the legend. 
 }

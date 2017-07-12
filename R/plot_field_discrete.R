@@ -1,4 +1,6 @@
-plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', labels = c(), breaks = c(), cscale = "Spectral",
+plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', labels = c(), breaks = c(), 
+                              cscale = "Spectral", rev_cscale = F,
+                              show_lat_lon_labels = T,
                                varname = "x", title = c(), mask = NULL, siglev = NULL, plot_only_sig = F, smooth = F, smooth_factor = 5,
                                smooth_theta = 0.5, lineWidth = 0.5, dotSize = 0.5, GRID_STEP = 10, FONT_SIZE = 18, show_legend = T) {
   
@@ -146,6 +148,10 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
       cscale = brewer.pal(length(labels), 'Spectral')
     }
   }
+  # Reverse color scale
+  if (rev_cscale) {
+    cscale = rev(cscale)
+  }
   g = g + scale_fill_manual(name = varname, values = cscale, drop = F)
   g = g + scale_color_manual(name = varname, values = cscale, drop = F)
   if (!show_legend) {
@@ -158,6 +164,8 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
   g = g + coord_cartesian(xlim = lonlim, ylim = latlim)
   g = g + theme(text = element_text(size = FONT_SIZE), panel.border = element_rect(colour = "black", size = 2,
                                                                                    fill = NA), panel.grid.major = element_line(colour = "black", size = 0.25))
-  g = g + xlab("Longitude") + ylab("Latitude")
+  if (show_lat_lon_labels) {
+    g = g + xlab("Longitude") + ylab("Latitude")
+  }
   return(g)
 }
