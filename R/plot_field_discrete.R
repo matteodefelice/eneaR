@@ -166,6 +166,8 @@ plot_field_discrete = function(x, lon, lat, lonlim = 'auto', latlim = 'auto', la
                                                                                    fill = NA), panel.grid.major = element_line(colour = "black", size = 0.25))
   if (show_lat_lon_labels) {
     g = g + xlab("Longitude") + ylab("Latitude")
+  } else {
+    g = g + theme(axis.title.x=element_blank(), axis.title.y=element_blank())
   }
   return(g)
 }
