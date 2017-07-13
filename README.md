@@ -12,4 +12,5 @@ You can install the package using `devtools` with `devtools::install_github("mat
 - `getTSfromSHP`: a very advanced function that aggregates gridded data on European NUTS regions (from ADM0 to ADM2) in time-series. 
 - `means_along`: a very naive function to perform the mean on the n-th dimension of an array avoiding `apply`
 - `getEconomicValue`: a vector-based function to evaluate the Economic Value of a probabilistic forecast according the Richardson definition
+- `arr_melt`: taken from this (https://gist.github.com/mdsumner/c9bbe897fafcba9ddaa00d7554d0edff#file-as_tibble-array-matrix-r) gist from Michael Sumner
 
