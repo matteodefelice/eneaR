@@ -58,7 +58,7 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2, type = 'mean') {
             }
         }
         lsel = do.call("cbind", lsel)
-        if (type != 'sum' || type != 'mean') {
+        if ((type != 'sum') && (type != 'mean')) {
             # In case of != sum or mean
             # we assume the output is "just" the raw 
             # cbind of selected points
