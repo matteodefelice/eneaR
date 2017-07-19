@@ -1,7 +1,7 @@
 Package: eneaR
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.1.4
+Version: 0.1.5
 Author: Matteo De Felice
 Maintainer: Matteo De Felice <matteo.defelice@enea.it>
 Description: This package contains useful functions to work with climate data.

@@ -16,7 +16,7 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2, type = 'mean') {
     } else if (type == 'sum') {
         base_fun = sum
         array_fun = rowSums
-    }
+    } 
     if (!is.list(obj)) {
         if (is.na(lat) || is.na(lon)) {
             stop("You need to specify lat and lon vector in case of not-ECOMS objects")
@@ -58,15 +58,22 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2, type = 'mean') {
             }
         }
         lsel = do.call("cbind", lsel)
-        if (length(dim(obj)) == 2) {
-            d = base_fun(lsel, na.rm = T)
-        } else if (length(dim(obj)) == 3) {
-            d = array_fun(lsel, na.rm = T)
+        if (type != 'sum' || type != 'mean') {
+            # In case of != sum or mean
+            # we assume the output is "just" the raw 
+            # cbind of selected points
+            d = lsel
         } else {
-            nmem = dim(obj)[1]
-            d = matrix(NA, nrow = nrow(lsel), ncol = nmem)
-            for (k in 1:nmem) {
-                d[, k] = array_fun(matrix(lsel[, seq(k, ncol(lsel), nmem)], nr = nrow(lsel)), na.rm = T)
+            if (length(dim(obj)) == 2) {
+                d = base_fun(lsel, na.rm = T)
+            } else if (length(dim(obj)) == 3) {
+                d = array_fun(lsel, na.rm = T)
+            } else {
+                nmem = dim(obj)[1]
+                d = matrix(NA, nrow = nrow(lsel), ncol = nmem)
+                for (k in 1:nmem) {
+                    d[, k] = array_fun(matrix(lsel[, seq(k, ncol(lsel), nmem)], nr = nrow(lsel)), na.rm = T)
+                }
             }
         }
         data[[REG]] = d
