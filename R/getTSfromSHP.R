@@ -1,4 +1,6 @@
-getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2, type = 'mean') {
+#' Aggregated a gridded object into national or regional boundaries. 
+#' @author Matteo De Felice
+getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2, type = 'mean', weighted = TRUE) {
     if (ADM == 2) {
         eumap = readOGR(system.file("NUTS", package = "eneaR"), "NUTS_REG_01M_2013_REGIONS")
     } else if (ADM == 1) {
@@ -45,6 +47,7 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2, type = 'mean') {
     for (REG in SEL_REGIONS) {
         sel_pts = pts_index[pts_index$region == REG, c(1, 2)]
         lsel = vector("list", nrow(sel_pts))
+        weight_lat = 0
         for (i in 1:nrow(sel_pts)) {
             if (length(dim(obj)) == 2) {
                 ## 2D array
@@ -54,7 +57,12 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2, type = 'mean') {
                 lsel[[i]] = obj[, sel_pts$lat[i], sel_pts$lon[i]]
             } else {
                 ## 4D array
-                lsel[[i]] = t(obj[, , sel_pts$lat[i], sel_pts$lon[i]])
+                lsel[[i]] = t(obj[, , sel_pts$lat[i], sel_pts$lon[i]]) 
+            }
+            if (weighted) {
+                # Weight by cos(lat)
+                lsel[[i]] = lsel[[i]] * sel_pts$lat[i] * pi / 180
+                weight_lat =  weight_lat + sel_pts$lat[i] * pi / 180
             }
         }
         lsel = do.call("cbind", lsel)
@@ -74,6 +82,10 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2, type = 'mean') {
                 for (k in 1:nmem) {
                     d[, k] = array_fun(matrix(lsel[, seq(k, ncol(lsel), nmem)], nr = nrow(lsel)), na.rm = T)
                 }
+            }
+            # Weighted part
+            if (weighted && type == 'mean') {
+                d = d * nrow(sel_pts) / weight_lat
             }
         }
         data[[REG]] = d
