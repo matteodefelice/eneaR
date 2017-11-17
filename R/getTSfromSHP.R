@@ -61,8 +61,8 @@ getTSfromSHP <- function(obj, lat = NA, lon = NA, ADM = 2, type = 'mean', weight
             }
             if (weighted) {
                 # Weight by cos(lat)
-                lsel[[i]] = lsel[[i]] * sel_pts$lat[i] * pi / 180
-                weight_lat =  weight_lat + sel_pts$lat[i] * pi / 180
+                lsel[[i]] = lsel[[i]] * cos(sel_pts$lat[i] * pi / 180)
+                weight_lat =  weight_lat + cos(sel_pts$lat[i] * pi / 180)
             }
         }
         lsel = do.call("cbind", lsel)
